@@ -18,11 +18,14 @@ func paste(waitTime:useconds_t=100000){
 }
 
 func pasteString(str:String){
-    print("pasteboard:\(str)")
+    sleep(3)
+    print("pasteboard text:\(str)")
     for i in 0..<str.count{
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString("\(str[str.index(str.startIndex, offsetBy: i)])", forType: .string)
-        paste()
+        DispatchQueue.main.sync {
+            paste()
+        }
     }
 }
 struct ContentView: View {
@@ -36,14 +39,11 @@ struct ContentView: View {
                 TextEditor(text: $fullText)
                 Button(action: {
                     isRunning=true
-                    buttonStatus="3s后开始输入"
-                    sleep(1)
-                    buttonStatus="2s后开始输入"
-                    sleep(1)
-                    buttonStatus="1s后开始输入"
-                    sleep(1)
                     buttonStatus="开始输入"
-                    pasteString(str: "$"+fullText)
+                    let serialQueue = DispatchQueue.init(label: "", qos: .default, attributes: [.concurrent], autoreleaseFrequency: .inherit, target: nil)
+                    serialQueue.async {
+                        pasteString(str: "$"+fullText)
+                    }
                     isRunning=false
                 }, label: {
                     Text(buttonStatus)
