@@ -19,7 +19,6 @@ func paste(waitTime:useconds_t=100000){
 
 func pasteString(str:String){
     print("pasteboard:\(str)")
-    sleep(3)
     for i in 0..<str.count{
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString("\(str[str.index(str.startIndex, offsetBy: i)])", forType: .string)
@@ -28,21 +27,34 @@ func pasteString(str:String){
 }
 struct ContentView: View {
     @State private var fullText: String = "请在这里输入文本..."
-    @State private var speed = 500000.0
+    @State private var speed = 100000.00
+    @State private var isRunning=false
+    @State private var buttonStatus="开始输入"
     var body: some View {
         HStack{
             VStack{
                 TextEditor(text: $fullText)
                 Button(action: {
+                    isRunning=true
+                    buttonStatus="3s后开始输入"
+                    sleep(1)
+                    buttonStatus="2s后开始输入"
+                    sleep(1)
+                    buttonStatus="1s后开始输入"
+                    sleep(1)
+                    buttonStatus="开始输入"
                     pasteString(str: "$"+fullText)
+                    isRunning=false
                 }, label: {
-                    Text("开始输入")
+                    Text(buttonStatus)
                 })
             }
             VStack{
+                Text(isRunning ? "当前状态:运行中\n" : "当前状态:等待任务\n")
+                    .foregroundColor(isRunning ? .red : .blue)
                 Text("输入速度")
                 Slider(value: $speed,
-                       in: 500000...1000000
+                       in: 100000...1000000
                 )
                 Text("\(speed/1000000)秒/字符")
             }
