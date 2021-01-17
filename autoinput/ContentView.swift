@@ -17,22 +17,36 @@ func paste(waitTime:useconds_t=100000){
     }
 }
 
+func pasteString(str:String){
+    print("pasteboard:\(str)")
+    sleep(3)
+    for i in 0..<str.count{
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString("\(str[str.index(str.startIndex, offsetBy: i)])", forType: .string)
+        paste()
+    }
+}
 struct ContentView: View {
+    @State private var fullText: String = "请在这里输入文本..."
+    @State private var speed = 500000.0
     var body: some View {
-        Button(action: {
-            let str=NSPasteboard.general.string(forType: .string)
-            print("pasteboard:\(str ?? "null")")
-            sleep(3)
-            if str != nil{
-                for i in str!.indices{
-                    NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString("\(str![i])", forType: .string)
-                    paste()
-                }
+        HStack{
+            VStack{
+                TextEditor(text: $fullText)
+                Button(action: {
+                    pasteString(str: "$"+fullText)
+                }, label: {
+                    Text("开始输入")
+                })
             }
-        }, label: {
-            Text("paste")
-        })
+            VStack{
+                Text("输入速度")
+                Slider(value: $speed,
+                       in: 500000...1000000
+                )
+                Text("\(speed/1000000)秒/字符")
+            }
+        }
     }
 }
 
