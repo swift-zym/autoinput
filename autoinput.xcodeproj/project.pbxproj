@@ -13,6 +13,7 @@
 		436E92E325B45D70003B48B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 436E92E225B45D70003B48B7 /* Preview Assets.xcassets */; };
 		436E92EF25B45D71003B48B7 /* autoinputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436E92EE25B45D71003B48B7 /* autoinputTests.swift */; };
 		436E92FA25B45D71003B48B7 /* autoinputUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436E92F925B45D71003B48B7 /* autoinputUITests.swift */; };
+		43C1521425B49447009B1BC5 /* AppCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C1521325B49447009B1BC5 /* AppCommands.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		436E92F525B45D71003B48B7 /* autoinputUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = autoinputUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		436E92F925B45D71003B48B7 /* autoinputUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = autoinputUITests.swift; sourceTree = "<group>"; };
 		436E92FB25B45D71003B48B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43C1521325B49447009B1BC5 /* AppCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCommands.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				436E92DB25B45D6D003B48B7 /* autoinputApp.swift */,
+				43C1521325B49447009B1BC5 /* AppCommands.swift */,
 				436E92DD25B45D6D003B48B7 /* ContentView.swift */,
 				436E92DF25B45D70003B48B7 /* Assets.xcassets */,
 				436E92E425B45D70003B48B7 /* Info.plist */,
@@ -263,6 +266,7 @@
 			files = (
 				436E92DE25B45D6D003B48B7 /* ContentView.swift in Sources */,
 				436E92DC25B45D6D003B48B7 /* autoinputApp.swift in Sources */,
+				43C1521425B49447009B1BC5 /* AppCommands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

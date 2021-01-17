@@ -17,7 +17,7 @@ func paste(waitTime:useconds_t=100000){
     }
 }
 
-func pasteString(str:String){
+func pasteString(str:String, status:inout Bool){
     sleep(3)
     print("pasteboard text:\(str)")
     for i in 0..<str.count{
@@ -27,6 +27,7 @@ func pasteString(str:String){
             paste()
         }
     }
+    status=false
 }
 struct ContentView: View {
     @State private var fullText: String = "请在这里输入文本..."
@@ -42,9 +43,8 @@ struct ContentView: View {
                     buttonStatus="开始输入"
                     let serialQueue = DispatchQueue.init(label: "", qos: .default, attributes: [.concurrent], autoreleaseFrequency: .inherit, target: nil)
                     serialQueue.async {
-                        pasteString(str: "$"+fullText)
+                        pasteString(str: "$"+fullText,status: &isRunning)
                     }
-                    isRunning=false
                 }, label: {
                     Text(buttonStatus)
                 })
@@ -56,7 +56,8 @@ struct ContentView: View {
                 Slider(value: $speed,
                        in: 100000...1000000
                 )
-                Text("\(speed/1000000)秒/字符")
+                Text("\(speed/1000000)秒/字符\n")
+                Text("使用帮助可在左上角 \"autoinput\" - \"帮助...\"处查看")
             }
         }
     }
